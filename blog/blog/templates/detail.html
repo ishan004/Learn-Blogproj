@@ -1,0 +1,38 @@
+{% extends 'base.html' %} {% block content %}
+
+<div class="container">
+    <div class="row">
+
+
+        <h2> {{post.title}}</h2>
+        <p> {{post.content}}</p>
+    </div>
+</div>
+
+<div class="container">
+    <div class="row">
+        <div class="card">
+            <ul class="list-group list-group-flush">
+                {% for comment in post.comments.all %}
+
+                <li class="list-group-item">{{comment.comment_text}} <b>-By {{comment.name}}</b> </li> {% endfor %}
+            </ul>
+
+        </div>
+
+    </div>
+</div>
+
+
+<div class="container">
+    <div class="row">
+        <form method="POST">
+            {{comment_form.as_p}} {% csrf_token %}
+
+            <button type="submit" class="btn btn-primary"> Submit</button>
+        </form>
+
+    </div>
+</div>
+
+{% endblock content %}
